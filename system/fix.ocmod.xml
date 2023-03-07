@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modification>
+  <id>Fix opencart 3 installer folder limitation</id>
+  <name>Fix opencart 3 installer folder limitation</name>
+  <code>fix_oc3_installer</code>
+  <version>1.0</version>
+  <author>GeekoDev</author>
+  <link><![CDATA[https://geekodev.com]]></link>
+
+  <file path="admin/controller/marketplace/install.php">
+  
+    <operation>
+      <search position="replace"><![CDATA[$safe = false;]]></search>
+      <add position="replace"><![CDATA[$safe = true;]]></add>
+    </operation>
+    
+    <operation>
+      <search position="before"><![CDATA[if (is_dir($file) && !is_dir($path)) {]]></search>
+      <add position="before"><![CDATA[		
+        if ($path == '') {
+          $path = DIR_CATALOG . '../' . $destination;
+        }
+      ]]></add>
+    </operation>
+    
+  </file>
+  
+</modification>
